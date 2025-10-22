@@ -1,4 +1,9 @@
 Stage 1 Bruno Files/
 .env
+.env.*
 venv/
+.venv/
 __pycache__/
+*.py[cod]
+*.sqlite3
+app.db

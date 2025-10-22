@@ -14,13 +14,13 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-@app.post("/strings")
+@app.post("/strings", status_code=status.HTTP_201_CREATED)
 def analyze_string(data: StringRequestBody, db: Session = Depends(get_session)):
     hash_id = StringProperty.generate_hash(data.value)
 
     existing = db.get(StringProperty, hash_id)
     if existing:
-        raise HTTPException(status_code=400, detail="String already exists in the DB, Try another String")
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="String already exists in the DB, Try another String")
     
     properties: dict = {}
     # Length
