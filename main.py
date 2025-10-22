@@ -70,7 +70,7 @@ def analyze_string(data: StringRequestBody, db: Session = Depends(get_session)):
 
 
 @app.get("/strings/filter-by-natural-language")
-def filter_strings_natrual_language(query: str = None, 
+def filter_strings_by_natural_language(query: str = None, 
                                     db: Session = Depends(get_session)):
     db_query = select(StringProperty)
     parsed_filters = {}

@@ -30,3 +30,12 @@ class StringProperty(SQLModel, table=True):
             value=value,
             properties=properties
         )
+    
+    def model_dump(self, *args, **kwargs):
+        """Ensure id appears first in JSON responses."""
+        data = super().model_dump(*args, **kwargs)
+        ordered = {
+            "id": data.pop("id"),
+            **data
+        }
+        return ordered
